@@ -1,0 +1,140 @@
+[2024-09-21 22:50:47,368][   train_val.py][line: 113][    INFO] args: Namespace(config='../configs/config_onenip.yaml', evaluate=True, local_rank='0', opts=['dataset.image_reader.kwargs.image_dir', '/fuxi_team2/persons/danylgao/weicun_ceph/datasets/visa', 'dataset.train.meta_file', '../data/visa/train.json', 'dataset.test.meta_file', '../data/visa/test.json', 'dataset.input_size', '[256, 256]', 'net[2].kwargs.num_encoder_layers', '4', 'net[2].kwargs.num_decoder_layers', '4', 'saver.save_dir', '../checkpoints/onenip-visa-4-4-256'])
+[2024-09-21 22:50:47,370][   train_val.py][line: 114][    INFO] config: {'criterion': [{'kwargs': {'weight': 1.0},
+                'name': 'FeatureMSELoss',
+                'type': 'FeatureMSELoss'},
+               {'kwargs': {'weight': 0.5},
+                'name': 'DiceLoss',
+                'type': 'DiceLoss'}],
+ 'dataset': {'batch_size': 8,
+             'image_reader': {'kwargs': {'color_mode': 'RGB',
+                                         'image_dir': '/fuxi_team2/persons/danylgao/weicun_ceph/datasets/visa'},
+                              'type': 'opencv'},
+             'input_size': [256, 256],
+             'pixel_mean': [0.485, 0.456, 0.406],
+             'pixel_std': [0.229, 0.224, 0.225],
+             'test': {'meta_file': '../data/visa/test.json'},
+             'train': {'hflip': False,
+                       'meta_file': '../data/visa/train.json',
+                       'rebalance': False,
+                       'rotate': False,
+                       'vflip': False},
+             'type': 'onenip',
+             'workers': 4},
+ 'evaluator': {'eval_dir': '../checkpoints/onenip-visa-4-4-256/result_eval_temp',
+               'key_metric': 'mean_pixel_auc',
+               'metrics': {'auc': [{'kwargs': {'avgpool_size': [16, 16]},
+                                    'name': 'max'},
+                                   {'name': 'pixel'}]},
+               'save_dir': '../checkpoints/onenip-visa-4-4-256/result_eval_temp',
+               'vis_compound': {'max_score': None,
+                                'min_score': None,
+                                'save_dir': '../checkpoints/onenip-visa-4-4-256/vis_compound'}},
+ 'exp_path': '../configs',
+ 'frozen_layers': ['backbone'],
+ 'log_path': '../checkpoints/onenip-visa-4-4-256/log',
+ 'net': [{'frozen': True,
+          'kwargs': {'outblocks': [1, 5, 9, 21],
+                     'outstrides': [2, 4, 8, 16],
+                     'pretrained': True},
+          'name': 'backbone',
+          'type': 'models.backbones.efficientnet_b4'},
+         {'kwargs': {'outplanes': [272], 'outstrides': [16]},
+          'name': 'neck',
+          'prev': 'backbone',
+          'type': 'models.necks.MFCN'},
+         {'kwargs': {'activation': 'relu',
+                     'dim_feedforward': 1024,
+                     'dropout': 0.1,
+                     'feature_jitter': {'prob': 1.0, 'scale': 20.0},
+                     'feature_size': [16, 16],
+                     'hidden_dim': 256,
+                     'initializer': {'method': 'xavier_uniform'},
+                     'neighbor_mask': {'mask': [True, True, True],
+                                       'neighbor_size': [8, 8]},
+                     'nhead': 8,
+                     'normalize_before': False,
+                     'num_decoder_layers': 4.0,
+                     'num_encoder_layers': 4.0,
+                     'pos_embed_type': 'learned',
+                     'save_recon': {'save_dir': '../checkpoints/onenip-visa-4-4-256/result_recon'}},
+          'name': 'reconstruction',
+          'prev': 'neck',
+          'type': 'models.reconstructions.OneNIP'}],
+ 'port': 11111,
+ 'random_seed': 133,
+ 'save_path': '../checkpoints/onenip-visa-4-4-256',
+ 'saver': {'always_save': False,
+           'auto_resume': False,
+           'load_path': '../checkpoints/onenip-visa-4-4-256/ckpt.pkl',
+           'log_dir': '../checkpoints/onenip-visa-4-4-256/log',
+           'save_dir': '../checkpoints/onenip-visa-4-4-256'},
+ 'trainer': {'clip_max_norm': 0.1,
+             'lr_scheduler': {'kwargs': {'gamma': 0.1, 'step_size': 800},
+                              'type': 'StepLR'},
+             'max_epoch': 1000,
+             'optimizer': {'kwargs': {'betas': [0.9, 0.999],
+                                      'lr': 0.0001,
+                                      'weight_decay': 0.0001},
+                           'type': 'AdamW'},
+             'print_freq_step': 1,
+             'tb_freq_step': 1,
+             'val_freq_epoch': 10},
+ 'version': 'v1.0.0'}
+[2024-09-21 22:50:48,001][       utils.py][line: 740][    INFO]  not exist, load from https://github.com/lukemelas/EfficientNet-PyTorch/releases/download/1.0/efficientnet-b4-6ed6700e.pth
+[2024-09-21 22:50:48,142][       utils.py][line: 761][    INFO] Loaded ImageNet pretrained efficientnet-b4
+[2024-09-21 22:50:51,963][   train_val.py][line: 140][    INFO] layers: ['backbone', 'neck', 'reconstruction']
+[2024-09-21 22:50:51,964][   train_val.py][line: 141][    INFO] active layers: ['neck', 'reconstruction']
+[2024-09-21 22:51:01,136][custom_dataset.py][line: 169][    INFO] building CustomDataset from: ../data/visa/train.json
+[2024-09-21 22:51:01,251][custom_dataset.py][line: 169][    INFO] building CustomDataset from: ../data/visa/test.json
+[2024-09-21 22:51:09,215][   train_val.py][line: 372][    INFO] Test: [1/34]	Time 7.884 (7.884)
+[2024-09-21 22:51:09,592][   train_val.py][line: 372][    INFO] Test: [2/34]	Time 0.378 (4.131)
+[2024-09-21 22:51:10,710][   train_val.py][line: 372][    INFO] Test: [3/34]	Time 1.118 (3.127)
+[2024-09-21 22:51:11,765][   train_val.py][line: 372][    INFO] Test: [4/34]	Time 1.055 (2.609)
+[2024-09-21 22:51:13,166][   train_val.py][line: 372][    INFO] Test: [5/34]	Time 1.401 (2.367)
+[2024-09-21 22:51:15,113][   train_val.py][line: 372][    INFO] Test: [6/34]	Time 1.947 (2.297)
+[2024-09-21 22:51:16,818][   train_val.py][line: 372][    INFO] Test: [7/34]	Time 1.704 (2.212)
+[2024-09-21 22:51:18,184][   train_val.py][line: 372][    INFO] Test: [8/34]	Time 1.366 (2.107)
+[2024-09-21 22:51:22,176][   train_val.py][line: 372][    INFO] Test: [9/34]	Time 3.992 (2.316)
+[2024-09-21 22:51:23,519][   train_val.py][line: 372][    INFO] Test: [10/34]	Time 1.343 (2.219)
+[2024-09-21 22:51:24,066][   train_val.py][line: 372][    INFO] Test: [11/34]	Time 0.547 (2.067)
+[2024-09-21 22:51:24,532][   train_val.py][line: 372][    INFO] Test: [12/34]	Time 0.466 (1.933)
+[2024-09-21 22:51:25,185][   train_val.py][line: 372][    INFO] Test: [13/34]	Time 0.654 (1.835)
+[2024-09-21 22:51:26,480][   train_val.py][line: 372][    INFO] Test: [14/34]	Time 1.294 (1.796)
+[2024-09-21 22:51:27,745][   train_val.py][line: 372][    INFO] Test: [15/34]	Time 1.266 (1.761)
+[2024-09-21 22:51:28,904][   train_val.py][line: 372][    INFO] Test: [16/34]	Time 1.158 (1.723)
+[2024-09-21 22:51:30,116][   train_val.py][line: 372][    INFO] Test: [17/34]	Time 1.212 (1.693)
+[2024-09-21 22:51:31,375][   train_val.py][line: 372][    INFO] Test: [18/34]	Time 1.259 (1.669)
+[2024-09-21 22:51:32,525][   train_val.py][line: 372][    INFO] Test: [19/34]	Time 1.150 (1.642)
+[2024-09-21 22:51:33,697][   train_val.py][line: 372][    INFO] Test: [20/34]	Time 1.172 (1.618)
+[2024-09-21 22:51:34,725][   train_val.py][line: 372][    INFO] Test: [21/34]	Time 1.028 (1.590)
+[2024-09-21 22:51:35,242][   train_val.py][line: 372][    INFO] Test: [22/34]	Time 0.517 (1.541)
+[2024-09-21 22:51:35,898][   train_val.py][line: 372][    INFO] Test: [23/34]	Time 0.656 (1.503)
+[2024-09-21 22:51:36,384][   train_val.py][line: 372][    INFO] Test: [24/34]	Time 0.486 (1.461)
+[2024-09-21 22:51:37,440][   train_val.py][line: 372][    INFO] Test: [25/34]	Time 1.056 (1.444)
+[2024-09-21 22:51:38,724][   train_val.py][line: 372][    INFO] Test: [26/34]	Time 1.284 (1.438)
+[2024-09-21 22:51:39,925][   train_val.py][line: 372][    INFO] Test: [27/34]	Time 1.201 (1.429)
+[2024-09-21 22:51:41,185][   train_val.py][line: 372][    INFO] Test: [28/34]	Time 1.261 (1.423)
+[2024-09-21 22:51:42,360][   train_val.py][line: 372][    INFO] Test: [29/34]	Time 1.175 (1.415)
+[2024-09-21 22:51:43,524][   train_val.py][line: 372][    INFO] Test: [30/34]	Time 1.164 (1.406)
+[2024-09-21 22:51:44,662][   train_val.py][line: 372][    INFO] Test: [31/34]	Time 1.138 (1.398)
+[2024-09-21 22:51:45,838][   train_val.py][line: 372][    INFO] Test: [32/34]	Time 1.176 (1.391)
+[2024-09-21 22:51:46,255][   train_val.py][line: 372][    INFO] Test: [33/34]	Time 0.417 (1.361)
+[2024-09-21 22:51:46,855][   train_val.py][line: 372][    INFO] Test: [34/34]	Time 0.600 (1.339)
+[2024-09-21 22:51:47,940][   train_val.py][line: 393][    INFO] Gathering final results ...
+[2024-09-21 22:51:47,941][   train_val.py][line: 395][    INFO]  * Loss 0.56950	total_num=2168.0
+[2024-09-21 22:53:59,209][ eval_helper.py][line: 361][    INFO] 
+|  clsname   |  max_auc  |  max_ap  |  pixel_auc  |  pixel_ap  |
+|:----------:|:---------:|:--------:|:-----------:|:----------:|
+|   candle   |   97.25   | 97.2786  |   99.3585   |  34.7889   |
+|  capsules  |  79.1667  | 88.8952  |   98.8355   |  59.3955   |
+|   cashew   |   92.72   | 96.4914  |   98.8689   |  73.9401   |
+| chewinggum |   99.42   | 99.7314  |   99.1452   |  67.9572   |
+|   fryum    |   90.06   | 95.3421  |   97.5735   |  47.8462   |
+| macaroni1  |   91.37   | 91.4073  |   99.3801   |  24.7194   |
+| macaroni2  |   81.49   | 83.4683  |   98.2308   |  9.21211   |
+|    pcb1    |   97.46   | 96.8817  |    99.69    |  74.9301   |
+|    pcb2    |   95.7    | 95.8369  |   98.5439   |  12.1827   |
+|    pcb3    |  95.3267  | 96.2255  |   98.8447   |  21.7293   |
+|    pcb4    |  99.0099  | 98.9425  |   98.0453   |  35.1272   |
+| pipe_fryum |   98.82   | 99.4739  |   99.4867   |  77.0703   |
+|    mean    |  93.1494  | 94.9979  |   98.8336   |  44.9083   |

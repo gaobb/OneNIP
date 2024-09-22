@@ -1,0 +1,17 @@
+easydict==1.13
+einops==0.8.0
+imgaug==0.4.0
+numpy==1.19.5
+opencv_python==4.6.0.66
+opencv_python_headless==4.7.0.72
+Pillow==8.4.0
+Pillow==10.4.0
+PyYAML==5.4.1
+PyYAML==6.0.2
+scikit_image==0.19.3
+scikit_learn==1.1.1
+tabulate==0.8.9
+tensorboardX==2.6
+tensorboardX==2.6.2.2
+torch==1.12.0
+torchvision==0.13.0

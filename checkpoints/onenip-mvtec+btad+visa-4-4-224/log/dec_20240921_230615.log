@@ -1,0 +1,197 @@
+[2024-09-21 23:06:15,644][   train_val.py][line: 113][    INFO] args: Namespace(config='../configs/config_onenip.yaml', evaluate=True, local_rank='0', opts=['dataset.image_reader.kwargs.image_dir', '/fuxi_team2/persons/danylgao/weicun_ceph/datasets/mvtec+btad+visa', 'dataset.train.meta_file', '../data/mvtec+btad+visa/train.json', 'dataset.test.meta_file', '../data/mvtec+btad+visa/test.json', 'dataset.input_size', '[224, 224]', 'net[2].kwargs.num_encoder_layers', '4', 'net[2].kwargs.num_decoder_layers', '4', 'saver.save_dir', '../checkpoints/onenip-mvtec+btad+visa-4-4-224'])
+[2024-09-21 23:06:15,648][   train_val.py][line: 114][    INFO] config: {'criterion': [{'kwargs': {'weight': 1.0},
+                'name': 'FeatureMSELoss',
+                'type': 'FeatureMSELoss'},
+               {'kwargs': {'weight': 0.5},
+                'name': 'DiceLoss',
+                'type': 'DiceLoss'}],
+ 'dataset': {'batch_size': 8,
+             'image_reader': {'kwargs': {'color_mode': 'RGB',
+                                         'image_dir': '/fuxi_team2/persons/danylgao/weicun_ceph/datasets/mvtec+btad+visa'},
+                              'type': 'opencv'},
+             'input_size': [224, 224],
+             'pixel_mean': [0.485, 0.456, 0.406],
+             'pixel_std': [0.229, 0.224, 0.225],
+             'test': {'meta_file': '../data/mvtec+btad+visa/test.json'},
+             'train': {'hflip': False,
+                       'meta_file': '../data/mvtec+btad+visa/train.json',
+                       'rebalance': False,
+                       'rotate': False,
+                       'vflip': False},
+             'type': 'onenip',
+             'workers': 4},
+ 'evaluator': {'eval_dir': '../checkpoints/onenip-mvtec+btad+visa-4-4-224/result_eval_temp',
+               'key_metric': 'mean_pixel_auc',
+               'metrics': {'auc': [{'kwargs': {'avgpool_size': [16, 16]},
+                                    'name': 'max'},
+                                   {'name': 'pixel'}]},
+               'save_dir': '../checkpoints/onenip-mvtec+btad+visa-4-4-224/result_eval_temp',
+               'vis_compound': {'max_score': None,
+                                'min_score': None,
+                                'save_dir': '../checkpoints/onenip-mvtec+btad+visa-4-4-224/vis_compound'}},
+ 'exp_path': '../configs',
+ 'frozen_layers': ['backbone'],
+ 'log_path': '../checkpoints/onenip-mvtec+btad+visa-4-4-224/log',
+ 'net': [{'frozen': True,
+          'kwargs': {'outblocks': [1, 5, 9, 21],
+                     'outstrides': [2, 4, 8, 16],
+                     'pretrained': True},
+          'name': 'backbone',
+          'type': 'models.backbones.efficientnet_b4'},
+         {'kwargs': {'outplanes': [272], 'outstrides': [16]},
+          'name': 'neck',
+          'prev': 'backbone',
+          'type': 'models.necks.MFCN'},
+         {'kwargs': {'activation': 'relu',
+                     'dim_feedforward': 1024,
+                     'dropout': 0.1,
+                     'feature_jitter': {'prob': 1.0, 'scale': 20.0},
+                     'feature_size': [14, 14],
+                     'hidden_dim': 256,
+                     'initializer': {'method': 'xavier_uniform'},
+                     'neighbor_mask': {'mask': [True, True, True],
+                                       'neighbor_size': [7, 7]},
+                     'nhead': 8,
+                     'normalize_before': False,
+                     'num_decoder_layers': 4.0,
+                     'num_encoder_layers': 4.0,
+                     'pos_embed_type': 'learned',
+                     'save_recon': {'save_dir': '../checkpoints/onenip-mvtec+btad+visa-4-4-224/result_recon'}},
+          'name': 'reconstruction',
+          'prev': 'neck',
+          'type': 'models.reconstructions.OneNIP'}],
+ 'port': 11111,
+ 'random_seed': 133,
+ 'save_path': '../checkpoints/onenip-mvtec+btad+visa-4-4-224',
+ 'saver': {'always_save': False,
+           'auto_resume': False,
+           'load_path': '../checkpoints/onenip-mvtec+btad+visa-4-4-224/ckpt.pth.tar',
+           'log_dir': '../checkpoints/onenip-mvtec+btad+visa-4-4-224/log',
+           'save_dir': '../checkpoints/onenip-mvtec+btad+visa-4-4-224'},
+ 'trainer': {'clip_max_norm': 0.1,
+             'lr_scheduler': {'kwargs': {'gamma': 0.1, 'step_size': 800},
+                              'type': 'StepLR'},
+             'max_epoch': 1000,
+             'optimizer': {'kwargs': {'betas': [0.9, 0.999],
+                                      'lr': 0.0001,
+                                      'weight_decay': 0.0001},
+                           'type': 'AdamW'},
+             'print_freq_step': 1,
+             'tb_freq_step': 1,
+             'val_freq_epoch': 10},
+ 'version': 'v1.0.0'}
+[2024-09-21 23:06:16,330][       utils.py][line: 740][    INFO]  not exist, load from https://github.com/lukemelas/EfficientNet-PyTorch/releases/download/1.0/efficientnet-b4-6ed6700e.pth
+[2024-09-21 23:06:16,470][       utils.py][line: 761][    INFO] Loaded ImageNet pretrained efficientnet-b4
+[2024-09-21 23:06:20,411][   train_val.py][line: 140][    INFO] layers: ['backbone', 'neck', 'reconstruction']
+[2024-09-21 23:06:20,411][   train_val.py][line: 141][    INFO] active layers: ['neck', 'reconstruction']
+[2024-09-21 23:06:30,768][custom_dataset.py][line: 169][    INFO] building CustomDataset from: ../data/mvtec+btad+visa/train.json
+[2024-09-21 23:06:30,956][custom_dataset.py][line: 169][    INFO] building CustomDataset from: ../data/mvtec+btad+visa/test.json
+[2024-09-21 23:06:39,454][   train_val.py][line: 372][    INFO] Test: [1/73]	Time 8.333 (8.333)
+[2024-09-21 23:06:39,671][   train_val.py][line: 372][    INFO] Test: [2/73]	Time 0.217 (4.275)
+[2024-09-21 23:06:39,807][   train_val.py][line: 372][    INFO] Test: [3/73]	Time 0.136 (2.895)
+[2024-09-21 23:06:40,135][   train_val.py][line: 372][    INFO] Test: [4/73]	Time 0.328 (2.253)
+[2024-09-21 23:06:40,269][   train_val.py][line: 372][    INFO] Test: [5/73]	Time 0.135 (1.830)
+[2024-09-21 23:06:40,428][   train_val.py][line: 372][    INFO] Test: [6/73]	Time 0.158 (1.551)
+[2024-09-21 23:06:41,040][   train_val.py][line: 372][    INFO] Test: [7/73]	Time 0.613 (1.417)
+[2024-09-21 23:06:41,719][   train_val.py][line: 372][    INFO] Test: [8/73]	Time 0.679 (1.325)
+[2024-09-21 23:06:42,408][   train_val.py][line: 372][    INFO] Test: [9/73]	Time 0.689 (1.254)
+[2024-09-21 23:06:43,057][   train_val.py][line: 372][    INFO] Test: [10/73]	Time 0.648 (1.193)
+[2024-09-21 23:06:43,770][   train_val.py][line: 372][    INFO] Test: [11/73]	Time 0.714 (1.150)
+[2024-09-21 23:06:44,527][   train_val.py][line: 372][    INFO] Test: [12/73]	Time 0.757 (1.117)
+[2024-09-21 23:06:45,047][   train_val.py][line: 372][    INFO] Test: [13/73]	Time 0.520 (1.071)
+[2024-09-21 23:06:45,961][   train_val.py][line: 372][    INFO] Test: [14/73]	Time 0.913 (1.060)
+[2024-09-21 23:06:46,868][   train_val.py][line: 372][    INFO] Test: [15/73]	Time 0.907 (1.050)
+[2024-09-21 23:06:47,480][   train_val.py][line: 372][    INFO] Test: [16/73]	Time 0.613 (1.022)
+[2024-09-21 23:06:48,186][   train_val.py][line: 372][    INFO] Test: [17/73]	Time 0.705 (1.004)
+[2024-09-21 23:06:49,072][   train_val.py][line: 372][    INFO] Test: [18/73]	Time 0.887 (0.997)
+[2024-09-21 23:06:50,140][   train_val.py][line: 372][    INFO] Test: [19/73]	Time 1.068 (1.001)
+[2024-09-21 23:06:51,007][   train_val.py][line: 372][    INFO] Test: [20/73]	Time 0.867 (0.994)
+[2024-09-21 23:06:52,193][   train_val.py][line: 372][    INFO] Test: [21/73]	Time 1.186 (1.003)
+[2024-09-21 23:06:53,158][   train_val.py][line: 372][    INFO] Test: [22/73]	Time 0.966 (1.002)
+[2024-09-21 23:06:53,906][   train_val.py][line: 372][    INFO] Test: [23/73]	Time 0.748 (0.991)
+[2024-09-21 23:06:54,702][   train_val.py][line: 372][    INFO] Test: [24/73]	Time 0.796 (0.983)
+[2024-09-21 23:06:55,176][   train_val.py][line: 372][    INFO] Test: [25/73]	Time 0.474 (0.962)
+[2024-09-21 23:06:55,974][   train_val.py][line: 372][    INFO] Test: [26/73]	Time 0.798 (0.956)
+[2024-09-21 23:06:56,557][   train_val.py][line: 372][    INFO] Test: [27/73]	Time 0.582 (0.942)
+[2024-09-21 23:06:57,182][   train_val.py][line: 372][    INFO] Test: [28/73]	Time 0.625 (0.931)
+[2024-09-21 23:06:57,730][   train_val.py][line: 372][    INFO] Test: [29/73]	Time 0.549 (0.918)
+[2024-09-21 23:06:58,487][   train_val.py][line: 372][    INFO] Test: [30/73]	Time 0.757 (0.912)
+[2024-09-21 23:06:59,270][   train_val.py][line: 372][    INFO] Test: [31/73]	Time 0.784 (0.908)
+[2024-09-21 23:06:59,764][   train_val.py][line: 372][    INFO] Test: [32/73]	Time 0.494 (0.895)
+[2024-09-21 23:07:00,489][   train_val.py][line: 372][    INFO] Test: [33/73]	Time 0.724 (0.890)
+[2024-09-21 23:07:01,221][   train_val.py][line: 372][    INFO] Test: [34/73]	Time 0.732 (0.885)
+[2024-09-21 23:07:01,887][   train_val.py][line: 372][    INFO] Test: [35/73]	Time 0.666 (0.879)
+[2024-09-21 23:07:06,877][   train_val.py][line: 372][    INFO] Test: [36/73]	Time 4.990 (0.993)
+[2024-09-21 23:07:08,544][   train_val.py][line: 372][    INFO] Test: [37/73]	Time 1.667 (1.011)
+[2024-09-21 23:07:09,916][   train_val.py][line: 372][    INFO] Test: [38/73]	Time 1.372 (1.021)
+[2024-09-21 23:07:11,743][   train_val.py][line: 372][    INFO] Test: [39/73]	Time 1.827 (1.042)
+[2024-09-21 23:07:13,891][   train_val.py][line: 372][    INFO] Test: [40/73]	Time 2.148 (1.069)
+[2024-09-21 23:07:15,581][   train_val.py][line: 372][    INFO] Test: [41/73]	Time 1.690 (1.084)
+[2024-09-21 23:07:16,741][   train_val.py][line: 372][    INFO] Test: [42/73]	Time 1.161 (1.086)
+[2024-09-21 23:07:17,876][   train_val.py][line: 372][    INFO] Test: [43/73]	Time 1.134 (1.087)
+[2024-09-21 23:07:18,846][   train_val.py][line: 372][    INFO] Test: [44/73]	Time 0.970 (1.085)
+[2024-09-21 23:07:20,061][   train_val.py][line: 372][    INFO] Test: [45/73]	Time 1.215 (1.088)
+[2024-09-21 23:07:20,986][   train_val.py][line: 372][    INFO] Test: [46/73]	Time 0.925 (1.084)
+[2024-09-21 23:07:21,777][   train_val.py][line: 372][    INFO] Test: [47/73]	Time 0.791 (1.078)
+[2024-09-21 23:07:22,886][   train_val.py][line: 372][    INFO] Test: [48/73]	Time 1.110 (1.078)
+[2024-09-21 23:07:23,939][   train_val.py][line: 372][    INFO] Test: [49/73]	Time 1.053 (1.078)
+[2024-09-21 23:07:24,963][   train_val.py][line: 372][    INFO] Test: [50/73]	Time 1.024 (1.077)
+[2024-09-21 23:07:25,907][   train_val.py][line: 372][    INFO] Test: [51/73]	Time 0.945 (1.074)
+[2024-09-21 23:07:26,933][   train_val.py][line: 372][    INFO] Test: [52/73]	Time 1.026 (1.073)
+[2024-09-21 23:07:27,734][   train_val.py][line: 372][    INFO] Test: [53/73]	Time 0.801 (1.068)
+[2024-09-21 23:07:28,672][   train_val.py][line: 372][    INFO] Test: [54/73]	Time 0.938 (1.066)
+[2024-09-21 23:07:29,527][   train_val.py][line: 372][    INFO] Test: [55/73]	Time 0.855 (1.062)
+[2024-09-21 23:07:30,199][   train_val.py][line: 372][    INFO] Test: [56/73]	Time 0.671 (1.055)
+[2024-09-21 23:07:31,339][   train_val.py][line: 372][    INFO] Test: [57/73]	Time 1.141 (1.056)
+[2024-09-21 23:07:32,173][   train_val.py][line: 372][    INFO] Test: [58/73]	Time 0.834 (1.053)
+[2024-09-21 23:07:32,967][   train_val.py][line: 372][    INFO] Test: [59/73]	Time 0.794 (1.048)
+[2024-09-21 23:07:33,541][   train_val.py][line: 372][    INFO] Test: [60/73]	Time 0.574 (1.040)
+[2024-09-21 23:07:34,480][   train_val.py][line: 372][    INFO] Test: [61/73]	Time 0.939 (1.039)
+[2024-09-21 23:07:35,291][   train_val.py][line: 372][    INFO] Test: [62/73]	Time 0.811 (1.035)
+[2024-09-21 23:07:35,972][   train_val.py][line: 372][    INFO] Test: [63/73]	Time 0.681 (1.029)
+[2024-09-21 23:07:36,895][   train_val.py][line: 372][    INFO] Test: [64/73]	Time 0.923 (1.028)
+[2024-09-21 23:07:37,631][   train_val.py][line: 372][    INFO] Test: [65/73]	Time 0.736 (1.023)
+[2024-09-21 23:07:38,555][   train_val.py][line: 372][    INFO] Test: [66/73]	Time 0.924 (1.022)
+[2024-09-21 23:07:39,383][   train_val.py][line: 372][    INFO] Test: [67/73]	Time 0.828 (1.019)
+[2024-09-21 23:07:40,131][   train_val.py][line: 372][    INFO] Test: [68/73]	Time 0.749 (1.015)
+[2024-09-21 23:07:40,752][   train_val.py][line: 372][    INFO] Test: [69/73]	Time 0.621 (1.009)
+[2024-09-21 23:07:41,346][   train_val.py][line: 372][    INFO] Test: [70/73]	Time 0.594 (1.003)
+[2024-09-21 23:07:42,071][   train_val.py][line: 372][    INFO] Test: [71/73]	Time 0.724 (0.999)
+[2024-09-21 23:07:42,472][   train_val.py][line: 372][    INFO] Test: [72/73]	Time 0.401 (0.991)
+[2024-09-21 23:07:42,873][   train_val.py][line: 372][    INFO] Test: [73/73]	Time 0.401 (0.983)
+[2024-09-21 23:07:45,443][   train_val.py][line: 393][    INFO] Gathering final results ...
+[2024-09-21 23:07:45,443][   train_val.py][line: 395][    INFO]  * Loss 5.21932	total_num=4632.0
+[2024-09-21 23:11:12,437][ eval_helper.py][line: 361][    INFO] 
+|  clsname   |  max_auc  |  max_ap  |  pixel_auc  |  pixel_ap  |
+|:----------:|:---------:|:--------:|:-----------:|:----------:|
+|     01     |  99.4169  | 99.7694  |   97.4726   |  58.2053   |
+|     02     |  76.8358  | 96.1032  |   96.4073   |  57.4374   |
+|     03     |  99.701   | 96.8593  |   99.6804   |  61.4579   |
+|   bottle   |  99.9206  | 99.9752  |   98.4302   |   80.734   |
+|   cable    |  99.1754  | 99.5264  |   97.7835   |  60.9605   |
+|   candle   |   95.99   | 96.3606  |   99.1769   |  30.0698   |
+|  capsule   |  88.7515  | 97.3283  |   98.5491   |  47.8363   |
+|  capsules  |  77.1333  | 87.8082  |   98.1678   |  52.2637   |
+|   carpet   |  99.7592  | 99.9267  |   99.072    |  71.0294   |
+|   cashew   |   92.5    | 95.8839  |   99.2008   |  64.8312   |
+| chewinggum |   99.42   |  99.729  |   99.0754   |  63.5048   |
+|   fryum    |   88.48   | 94.3091  |   97.5304   |  45.9697   |
+|    grid    |  98.9975  | 99.6949  |   98.1078   |  45.1335   |
+|  hazelnut  |    100    |   100    |   98.1968   |   63.691   |
+|  leather   |    100    |   100    |   99.6419   |  69.0248   |
+| macaroni1  |   90.43   | 90.7063  |   99.1716   |  18.3623   |
+| macaroni2  |   82.39   | 83.5419  |   97.6996   |  5.84533   |
+| metal_nut  |  99.6579  | 99.9195  |   95.0002   |  64.9982   |
+|    pcb1    |   94.8    | 93.7202  |   99.5489   |  71.0315   |
+|    pcb2    |   93.98   | 94.5815  |   97.9647   |  11.0109   |
+|    pcb3    |  90.1089  | 91.5385  |   98.1885   |  20.4915   |
+|    pcb4    |  99.3663  | 99.3344  |   97.8208   |  33.5507   |
+|    pill    |  95.3082  | 99.1163  |   95.5679   |  44.2291   |
+| pipe_fryum |   97.52   | 98.8868  |   99.3661   |  70.3832   |
+|   screw    |  83.0703  | 93.6143  |   98.3603   |  32.5693   |
+|    tile    |  99.8918  | 99.9589  |   94.771    |   74.96    |
+| toothbrush |  94.4444  | 97.7702  |   98.6171   |  50.3366   |
+| transistor |  98.8333  | 98.3291  |   98.2693   |  78.5572   |
+|    wood    |  99.0351  | 99.7183  |   94.8278   |  64.4692   |
+|   zipper   |  98.7658  | 99.6816  |   97.763    |   59.147   |
+|    mean    |  94.4561  | 96.7897  |   97.981    |   52.403   |
