@@ -20,7 +20,7 @@ All pre-trained model weights are stored in Google Drive.
 ||
 | VisA  |  224 $\times$ 224  |  92.5  |  98.7  |  43.3  |  [model weight](https://drive.google.com/file/d/16r5pq5CBVPgu2jMizVJW83K0oB_xdmFl/view?usp=sharing) | [testlog](./checkpoints/onenip-visa-4-4-224/log/dec_20240921_221901.log)  | 
 | VisA  |  256 $\times$ 256  |  93.1  |  98.8  |  44.9  |  [model weight](https://drive.google.com/file/d/1ZV2Hh5oniMW1cePsRQ_RPgkCBIOQHoIi/view?usp=sharing) | [testlog](./checkpoints/onenip-visa-4-4-256/log/dec_20240921_225047.log)  |
-| VisA  |  320 $\times$ 320  |  94.2  |  98.8  |  46.1  |  [model weight](https://drive.google.com/file/d/17DX4ukJIzMAKYfLPMu1yp3VbvFfXNCvo/view?usp=sharing) | [testlog](./checkpoints/onenip-btad-4-4-320/log/dec_20240921_235736.log)  | 
+| VisA  |  320 $\times$ 320  |  94.2  |  98.8  |  46.1  |  [model weight](https://drive.google.com/file/d/17DX4ukJIzMAKYfLPMu1yp3VbvFfXNCvo/view?usp=sharing) | [testlog](./checkpoints/onenip-visa-4-4-320/log/dec_20240921_220825.log)  | 
 ||
 | BTAD  |  224 $\times$ 224  |  92.6  |  97.4  |  56.8  |  [model weight](https://drive.google.com/file/d/1drMQZubI3dFz0yNXJuyTOU4DmmFkGNEc/view?usp=sharing) | [testlog](./checkpoints/onenip-btad-4-4-224/log/dec_20240921_221227.log)  | 
 | BTAD  |  256 $\times$ 256  |  94.6  |  97.6  |  57.0  |  [model weight](https://drive.google.com/file/d/1avzuJQLd2Xd_7hUEG25s1ev7cMqNUNJz/view?usp=sharing) | [testlog](./checkpoints/onenip-btad-4-4-256/log/dec_20240921_221334.log)  | 
