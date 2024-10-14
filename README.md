@@ -3,7 +3,11 @@ Official PyTorch Implementation of [Learning to Detect Multi-class Anomalies wit
 
 ![Image text](docs/OneNIP-Framework.png)
 
-OneNIP mainly consists of unsupervised reconstruction, unsupervised restoration, and supervised refiner.
+OneNIP mainly consists of Unsupervised Reconstruction, Unsupervised Restoration, and Supervised Refiner. 
+Unsupervised Reconstruction and Unsupervised Restoration share the same encoder-decoder architectures and weights. Supervised Refiner is implemented by two transposed convolution blocks, and each following a 1×1 convolution layer.
+- Unsupervised Reconstruction reconstructs normal tokens; 
+- Unsupervised Restoration restores pseudo anomaly tokens to the corresponding normal tokens;
+- Supervised Refiner refines reconstruction/restoration errors to achieve more accurate anomaly segmentation.
 
 ## 1. Comparsions of OneNIP and UniAD
 
