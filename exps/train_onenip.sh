@@ -1,9 +1,9 @@
 export PYTHONPATH=../:$PYTHONPATH
 CUDA_VISIBLE_DEVICES=$2
 
-checkpoints_path=../checkpoints-retraining
-dtd_path=/fuxi_team2/persons/danylgao/weicun_ceph/datasets/dtd
-data_path=/fuxi_team2/persons/danylgao/weicun_ceph/datasets
+checkpoints_path=../checkpoints-v2
+dtd_path=../data/dtd  # Change to your path （dtd）
+data_path=../data     # Change to your path  (mvtec, visa, btad, mvtec+btad+visa)
 num_encoder=4
 num_decoder=4
 

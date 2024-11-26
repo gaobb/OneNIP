@@ -547,7 +547,7 @@ class TransformerDecoderLayer(nn.Module):
             key_padding_mask=padding_mask
             )[0]
 
-        keys = keys + self.dropout3(mlp_out)
+        keys = keys + self.dropout3(attn_out)
         keys = self.norm3(keys)
 
         
@@ -597,7 +597,7 @@ class TransformerDecoderLayer(nn.Module):
             key_padding_mask=padding_mask
             )
 
-        keys = keys + self.dropout3(mlp_out)
+        keys = keys + self.dropout3(attn_out)
 
         return queries, keys
 

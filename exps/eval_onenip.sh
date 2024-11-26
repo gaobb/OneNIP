@@ -2,7 +2,7 @@ export PYTHONPATH=../:$PYTHONPATH
 CUDA_VISIBLE_DEVICES=$2
 
 
-checkpoints_path=../checkpoints
+checkpoints_path=../checkpoints-v2
 dtd_path=../data/dtd  # Change to your path （dtd）
 data_path=../data     # Change to your path  (mvtec, visa, btad, mvtec+btad+visa)
 num_encoder=4
