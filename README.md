@@ -130,4 +130,9 @@ If you find this code useful in your research, please consider citing us:
 
 ## Acknowledgement
 
-Our OneNIP is build on [UniAD](https://github.com/zhiyuanyou/UniAD). Thank the authors of UniAD for open-sourcing their implementation codes!
+Our OneNIP is built on [UniAD](https://github.com/zhiyuanyou/UniAD). Thank the authors of UniAD for open-sourcing their implementation codes!
+
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=gaobb/OneNIP&type=Date)](https://www.star-history.com/#gaobb/OneNIP&Date)
