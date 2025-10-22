@@ -8,7 +8,7 @@ data_path=../data     # Change to your path  (mvtec, visa, btad, mvtec+btad+visa
 num_encoder=4
 num_decoder=4
 
-for dataset in mvtec visa btad mvtec+btad+visa 
+for dataset in mvtec visa btad medical mvtec+btad+visa 
 do
     for img_size in 224 256 320
     do
