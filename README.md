@@ -18,7 +18,7 @@ All pre-trained model weights are stored in Google Drive.
 
 | Dataset |  Input-Reslution | I-AUROC | P-AUROC | P-AUAP | checkpoints-v2 | Test-Log|
 | ------ | ------ | ------ | ------ | ------ | ------ | ------ | 
-| Medical |  224 $\times$ 224  |  84.1  |  97.3  |  46.1  |  [model weight]() | [testlog](./checkpoints-v2/onenip-medical-4-4-224/log/dec_20251021_104728.log)  | 
+| Medical |  224 $\times$ 224  |  84.1  |  97.3  |  46.1  |  [model weight](https://drive.google.com/file/d/16UefoFzSFplIKOGmuUTjxEPSp_12tRi6/view?usp=sharing) | [testlog](./checkpoints-v2/onenip-medical-4-4-224/log/dec_20251021_104728.log)  | 
 | MVTec |  224 $\times$ 224  |  98.0  |  97.9  |  63.9  |  [model weight](https://drive.google.com/file/d/1fDptxxFy2j2xFi6c23BqGbTh8tBy4cWJ/view?usp=sharing) | [testlog](./checkpoints-v2/onenip-mvtec-4-4-224/log/dec_20241125_200801.log)  | 
 | MVTec |  256 $\times$ 256  |  97.9  |  97.9  |  64.8  |  [model weight](https://drive.google.com/file/d/1Yt62r23LbsZlb4JrITZqoQtiKdF6M8ek/view?usp=sharing) | [testlog](./checkpoints-v2/onenip-mvtec-4-4-256/log/dec_20241125_201022.log)  | 
 | MVTec |  320 $\times$ 320  |  98.4  |  98.0  |  66.7  |  [model weight](https://drive.google.com/file/d/1jRXWfLxPqsW4Mb0ClH2L6HREUtE8wh4l/view?usp=sharing) | [testlog](./checkpoints-v2/onenip-mvtec-4-4-320/log/dec_20241125_201314.log)  | 
